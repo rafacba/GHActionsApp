@@ -44,3 +44,11 @@ jobs:
           uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload &
           sleep 5
           curl -f http://127.0.0.1:8000/docs
+      # 6. Build Docker image
+      - name: Build Docker image
+        uses: mr-smithers-excellent/docker-build-push@v6
+        with:
+          image: rafacba/ghactions
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
